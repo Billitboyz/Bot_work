@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hanoi Eats & Boba • Balham</title>
+  <style>
+    :root {
+      --copper: #b05f3c;
+      --hazel: #6e4638;
+      --cream: #f6efe7;
+      --latte: #fff9f2;
+      --charcoal: #1f1a17;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      color: var(--charcoal);
+      background: var(--cream);
+      line-height: 1.55;
+    }
+    header {
+      padding: 3.2rem 1rem 2.8rem;
+      text-align: center;
+      background: linear-gradient(160deg, #f2dfcf 0%, #f8eee3 45%, #fff 100%);
+      border-bottom: 1px solid #edd9c8;
+    }
+    .badge {
+      display: inline-block;
+      margin-bottom: .7rem;
+      padding: .3rem .65rem;
+      border-radius: 999px;
+      border: 1px solid #e6cfbc;
+      font-size: .75rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #7c6353;
+      background: rgba(255,255,255,.72);
+    }
+    h1 {
+      margin: 0 0 .7rem;
+      color: var(--hazel);
+      font-size: clamp(1.9rem, 6vw, 3rem);
+    }
+    .sub {
+      max-width: 700px;
+      margin: 0 auto 1.2rem;
+      color: #5d4d43;
+      font-size: 1rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      gap: .55rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: .72rem 1.15rem;
+      font-size: .92rem;
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--copper); color: #fff; }
+    .btn.soft { background: #f3e3d5; color: #5c4a3d; }
+
+    main {
+      max-width: 1050px;
+      margin: -1.4rem auto 2.2rem;
+      padding: 0 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ebddcf;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(31, 18, 10, .08);
+      padding: 1rem;
+    }
+    h2 {
+      margin: 0 0 .55rem;
+      font-size: 1.08rem;
+      color: var(--hazel);
+    }
+    .muted { color: #64564d; font-size: .92rem; margin: 0 0 .8rem; }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: .5rem;
+      margin-bottom: .8rem;
+    }
+    .tab {
+      text-align: center;
+      border: 1px solid #e8d8ca;
+      border-radius: 12px;
+      padding: .55rem;
+      font-size: .88rem;
+      background: #fff;
+    }
+    .tab.active {
+      background: #f4e4d7;
+      border-color: #ddc1ab;
+      font-weight: 600;
+    }
+
+    .menu-items {
+      display: grid;
+      gap: .55rem;
+    }
+    .item {
+      border: 1px solid #ead9cb;
+      border-radius: 12px;
+      padding: .6rem .65rem;
+      background: var(--latte);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .6rem;
+    }
+    .item b { display: block; font-size: .92rem; }
+    .item small { color: #6f6157; display: block; }
+
+    .booking-grid {
+      display: grid;
+      gap: .55rem;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: .7rem;
+    }
+    .booking-grid input, .booking-grid select {
+      width: 100%;
+      border: 1px solid #dcc8b8;
+      border-radius: 10px;
+      padding: .58rem;
+      background: #fffcf8;
+      font-size: .88rem;
+    }
+    .booking-grid .wide { grid-column: 1 / -1; }
+
+    .trust {
+      margin-top: .8rem;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: .45rem;
+      font-size: .75rem;
+      text-align: center;
+    }
+    .trust span {
+      border: 1px solid #e5d2c2;
+      border-radius: 9px;
+      padding: .35rem .25rem;
+      background: #fff;
+    }
+
+    .seo {
+      margin-top: 1rem;
+      font-size: .84rem;
+      color: #66574d;
+    }
+
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .trust { grid-template-columns: 1fr; }
+      .booking-grid { grid-template-columns: 1fr; }
+      .booking-grid .wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="badge">Balham Landing Mockup • Task 1</span>
+    <h1>Hanoi Eats &amp; Boba</h1>
+    <p class="sub">Fresh Vietnamese bowls, handmade boba, and a frictionless online journey — built to convert table bookings and takeaway orders.</p>
+    <div class="hero-cta">
+      <button class="btn primary">Book a Table</button>
+      <button class="btn soft">Order Delivery</button>
+      <button class="btn soft">Click &amp; Collect</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>Order Journey (Mobile-first)</h2>
+        <p class="muted">Fast 3-step checkout with bestsellers surfaced upfront.</p>
+
+        <div class="tabs">
+          <div class="tab active">Delivery</div>
+          <div class="tab">Pickup</div>
+        </div>
+
+        <div class="menu-items">
+          <article class="item">
+            <div><b>Hanoi Pho Special</b><small>Slow broth, brisket, herbs</small></div>
+            <strong>£13.90</strong>
+          </article>
+          <article class="item">
+            <div><b>Lemongrass Chicken Rice Bowl</b><small>Pickled veg, chilli mayo</small></div>
+            <strong>£11.50</strong>
+          </article>
+          <article class="item">
+            <div><b>Brown Sugar Boba Milk Tea</b><small>Fresh pearls, oat milk option</small></div>
+            <strong>£5.60</strong>
+          </article>
+        </div>
+
+        <div class="hero-cta" style="margin-top:.8rem;">
+          <button class="btn primary">Checkout in 2 mins</button>
+          <button class="btn soft">View Full Menu</button>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Instant Table Booking</h2>
+        <p class="muted">Quick reservation module for peak evenings and weekend traffic.</p>
+
+        <div class="booking-grid">
+          <input type="date" aria-label="Date" />
+          <select aria-label="Guests"><option>2 guests</option><option>4 guests</option><option>6+ guests</option></select>
+          <input type="time" aria-label="Time" />
+          <input type="text" placeholder="Name" aria-label="Name" />
+          <input class="wide" type="email" placeholder="Email" aria-label="Email" />
+        </div>
+        <button class="btn primary" style="width:100%;">Confirm Booking</button>
+
+        <div class="trust">
+          <span>⭐ 4.8 rating</span>
+          <span>Avg 30 min delivery</span>
+          <span>Halal + Vegan options</span>
+        </div>
+
+        <p class="seo"><strong>Conversion extras:</strong> sticky mobile CTA, reorder button for returning users, and event-night booking prompts.</p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

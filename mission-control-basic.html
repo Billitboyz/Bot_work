@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mission Control • Basic</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111a2e;
+      --panel2: #16223b;
+      --text: #eaf1ff;
+      --muted: #9fb0d8;
+      --border: #253a60;
+      --busy: #60a5fa;
+      --idle: #36d399;
+      --blocked: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(900px 500px at 10% -10%, #1a2a4a 0%, var(--bg) 60%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    h1 { margin: 0; font-size: 1.1rem; }
+    h2 { margin: 0 0 10px; font-size: .95rem; }
+    .muted { color: var(--muted); font-size: .85rem; }
+
+    .agents { display: grid; gap: 8px; }
+    .agent {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #0f1930;
+      padding: 9px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .agent-name { font-weight: 600; font-size: .9rem; }
+    .agent-task { color: var(--muted); font-size: .8rem; }
+
+    .badge {
+      font-size: .74rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-transform: lowercase;
+      white-space: nowrap;
+    }
+    .working { color: var(--busy); border-color: #33588f; background: #10253f; }
+    .idle { color: var(--idle); border-color: #2e6b55; background: #113126; }
+    .blocked { color: var(--blocked); border-color: #7a3340; background: #3a1f24; }
+
+    .task-title { font-weight: 700; margin-bottom: 6px; }
+    .task-meta { color: var(--muted); font-size: .84rem; }
+    .progress {
+      margin-top: 10px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #0d1528;
+      overflow: hidden;
+    }
+    .progress > div {
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(90deg, #45c8ff, #4f8dff);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Mission Control</h1>
+      <div class="muted">Basic frontend retry: agent list + current task</div>
+    </section>
+
+    <section class="card">
+      <h2>Agent List</h2>
+      <div class="agents" id="agentList"></div>
+    </section>
+
+    <section class="card">
+      <h2>Current Task</h2>
+      <div class="task-title" id="taskTitle"></div>
+      <div class="task-meta" id="taskMeta"></div>
+      <div class="task-meta" id="taskNote" style="margin-top:4px"></div>
+      <div class="progress"><div id="taskProgress"></div></div>
+    </section>
+  </main>
+
+  <script>
+    const data = {
+      agents: [
+        { name: 'Main Agent', task: 'Mission Control frontend retry', status: 'working' },
+        { name: 'UI Subagent', task: 'Prepare next incremental chunk', status: 'idle' },
+        { name: 'Ops Watcher', task: 'Waiting on data endpoint', status: 'blocked' }
+      ],
+      currentTask: {
+        title: 'Build basic dashboard shell (agent list + current task)',
+        owner: 'Main Agent',
+        eta: '10m',
+        note: 'Incremental mode enabled to avoid timeouts.',
+        progress: 42
+      }
+    };
+
+    document.getElementById('agentList').innerHTML = data.agents.map(a => `
+      <div class="agent">
+        <div>
+          <div class="agent-name">${a.name}</div>
+          <div class="agent-task">${a.task}</div>
+        </div>
+        <span class="badge ${a.status}">${a.status}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('taskTitle').textContent = data.currentTask.title;
+    document.getElementById('taskMeta').textContent = `Owner: ${data.currentTask.owner} • ETA: ${data.currentTask.eta}`;
+    document.getElementById('taskNote').textContent = data.currentTask.note;
+    document.getElementById('taskProgress').style.width = `${data.currentTask.progress}%`;
+  </script>
+</body>
+</html>

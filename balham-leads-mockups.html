@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balham Lead Landing Page Mockups</title>
+  <style>
+    :root {
+      --copper: #b05f3c;
+      --hazel: #6f4638;
+      --cream: #f6efe7;
+      --latte: #fff9f2;
+      --sage: #6a8966;
+      --charcoal: #201915;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(180deg, #efe4d8, #f8f3ed 220px);
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1.2rem;
+    }
+    .intro {
+      text-align: center;
+      padding: 1.4rem 0 0.5rem;
+    }
+    .intro h1 { margin: 0 0 0.5rem; color: var(--hazel); font-size: clamp(1.5rem, 4vw, 2.3rem); }
+    .intro p { margin: 0; color: #5f5046; }
+
+    .mockups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .mockup {
+      background: #fff;
+      border: 1px solid #ebddd0;
+      border-radius: 20px;
+      box-shadow: 0 14px 34px rgba(35, 20, 11, 0.08);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .hero {
+      padding: 1.2rem;
+      background: radial-gradient(circle at 85% 0%, #f3d8c5 0, #f7ecdf 42%, #fff 90%);
+      border-bottom: 1px solid #eddccf;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #7a6354;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid #e8d4c2;
+      border-radius: 999px;
+      padding: 0.28rem 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+    .hero h2 { margin: 0 0 0.45rem; font-size: 1.35rem; color: var(--hazel); }
+    .hero p { margin: 0 0 0.9rem; font-size: 0.94rem; color: #5b4d44; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.56rem 0.95rem;
+      font-size: 0.83rem;
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--copper); color: #fff; }
+    .btn.soft { background: #f3e5d8; color: #5e4b3f; }
+
+    .body { padding: 1rem 1.2rem 1.15rem; background: var(--latte); }
+    .section { margin-bottom: 0.9rem; }
+    .section:last-child { margin-bottom: 0; }
+    .section h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7d6558;
+    }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      background: #fff;
+      border: 1px solid #e9d7c7;
+      border-radius: 11px;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.82rem;
+    }
+    .box {
+      background: #fff;
+      border: 1px dashed #ddc8b7;
+      border-radius: 12px;
+      padding: 0.56rem 0.66rem;
+      font-size: 0.85rem;
+      color: #54463d;
+    }
+    .trust {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.45rem;
+      font-size: 0.74rem;
+      text-align: center;
+    }
+    .trust span {
+      border: 1px solid #e7d4c4;
+      border-radius: 9px;
+      padding: 0.33rem 0.2rem;
+      background: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 0.9rem; }
+      .hero, .body { padding: 0.9rem; }
+      .trust { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="intro">
+      <h1>Balham Lead Mockups (Warm Camden-style)</h1>
+      <p>Concise responsive landing-page concepts focused on conversion goals for each business.</p>
+    </header>
+
+    <main class="mockups">
+      <article class="mockup">
+        <div class="hero">
+          <span class="badge">Restaurant • Booking + Online Orders</span>
+          <h2>Hanoi Eats &amp; Boba</h2>
+          <p>Vietnamese comfort food and fresh boba, delivered fast or enjoyed in a cosy Balham setting.</p>
+          <div class="cta-row">
+            <button class="btn primary">Book a table</button>
+            <button class="btn soft">Order now</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="section">
+            <h3>Quick Funnel</h3>
+            <div class="chip-list">
+              <span class="chip">2-click booking widget</span>
+              <span class="chip">Pickup / delivery toggle</span>
+              <span class="chip">Popular bowls carousel</span>
+            </div>
+          </div>
+          <div class="section">
+            <h3>Menu Trigger</h3>
+            <div class="box">"Top picks tonight" cards: Pho Special, Lemongrass Chicken, Brown Sugar Boba.</div>
+          </div>
+          <div class="section trust">
+            <span>⭐ 4.8 local rating</span><span>30-min avg delivery</span><span>Halal options</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mockup">
+        <div class="hero">
+          <span class="badge">Café • Local SEO + Lead Capture</span>
+          <h2>Panda's Coffee House</h2>
+          <p>Neighbourhood café for morning regulars, weekend brunch crowds, and remote workers.</p>
+          <div class="cta-row">
+            <button class="btn primary">Get directions</button>
+            <button class="btn soft">Join coffee club</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="section">
+            <h3>SEO Blocks</h3>
+            <div class="chip-list">
+              <span class="chip">"Best coffee in Balham" copy</span>
+              <span class="chip">Schema: LocalBusiness + FAQ</span>
+              <span class="chip">Google reviews preview</span>
+            </div>
+          </div>
+          <div class="section">
+            <h3>Capture Offer</h3>
+            <div class="box">Email/SMS mini-form: "Get 20% off your first pastry + coffee combo".</div>
+          </div>
+          <div class="section trust">
+            <span>Free Wi-Fi</span><span>Dog-friendly</span><span>Open from 7am</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mockup">
+        <div class="hero">
+          <span class="badge">Café • Brochure + Contact + Map</span>
+          <h2>Parish Coffee</h2>
+          <p>Simple elegant brochure site showcasing story, menu essentials, and how to visit.</p>
+          <div class="cta-row">
+            <button class="btn primary">View menu</button>
+            <button class="btn soft">Contact us</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="section">
+            <h3>Core Sections</h3>
+            <div class="chip-list">
+              <span class="chip">Hero + origin story</span>
+              <span class="chip">Menu snapshot (coffee/food)</span>
+              <span class="chip">Hours + map embed</span>
+            </div>
+          </div>
+          <div class="section">
+            <h3>Contact Panel</h3>
+            <div class="box">One-page contact strip: phone, email, social, "Book catering" button.</div>
+          </div>
+          <div class="section trust">
+            <span>Locally roasted beans</span><span>Wheelchair access</span><span>Family-friendly</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mockup">
+        <div class="hero">
+          <span class="badge">Venue • Events + Promos + Trust</span>
+          <h2>The Apple Blue</h2>
+          <p>Food and drink venue for date nights, sports screenings, and private celebration bookings.</p>
+          <div class="cta-row">
+            <button class="btn primary">View events</button>
+            <button class="btn soft">Reserve a space</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="section">
+            <h3>Conversion Layout</h3>
+            <div class="chip-list">
+              <span class="chip">Weekly events calendar</span>
+              <span class="chip">Promo banner (2-for-1 / quiz)</span>
+              <span class="chip">Private hire enquiry form</span>
+            </div>
+          </div>
+          <div class="section">
+            <h3>Trust Signals</h3>
+            <div class="box">Photo-led social proof, testimonials, venue capacity info, and partner logos.</div>
+          </div>
+          <div class="section trust">
+            <span>4.7★ on Google</span><span>Licensed until late</span><span>Group bookings</span>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panda's Coffee House • Balham</title>
+  <meta name="description" content="Panda's Coffee House in Balham for specialty coffee, brunch, and workspace-friendly seating. Join our local coffee club for exclusive offers." />
+  <style>
+    :root {
+      --copper: #b05f3c;
+      --hazel: #6f4739;
+      --cream: #f6efe7;
+      --latte: #fffaf4;
+      --charcoal: #1f1a17;
+      --leaf: #6c8a66;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.55;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2.6rem;
+      background: linear-gradient(165deg, #efddcf 0%, #f7ede2 48%, #fff 100%);
+      border-bottom: 1px solid #ebd7c5;
+    }
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid #e2ccb8;
+      border-radius: 999px;
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #796254;
+      padding: .28rem .6rem;
+      background: rgba(255,255,255,.72);
+      margin-bottom: .7rem;
+    }
+    h1 {
+      margin: 0 0 .6rem;
+      font-size: clamp(1.9rem, 6vw, 3rem);
+      color: var(--hazel);
+    }
+    .sub {
+      margin: 0 auto 1.1rem;
+      max-width: 710px;
+      color: #5f5148;
+    }
+    .cta-row { display: inline-flex; gap: .55rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: .7rem 1.15rem;
+      font-size: .9rem;
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--copper); color: #fff; }
+    .btn.soft { background: #f3e5d8; color: #5b4a3e; }
+
+    main {
+      max-width: 1080px;
+      margin: -1.2rem auto 2.2rem;
+      padding: 0 1rem;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e9dccf;
+      border-radius: 18px;
+      box-shadow: 0 16px 38px rgba(35, 22, 14, .08);
+      padding: 1rem;
+    }
+    h2 {
+      margin: 0 0 .55rem;
+      font-size: 1.05rem;
+      color: var(--hazel);
+    }
+    .muted {
+      margin: 0 0 .75rem;
+      color: #65574e;
+      font-size: .92rem;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-bottom: .85rem;
+    }
+    .kw {
+      border: 1px solid #e6d5c6;
+      background: var(--latte);
+      border-radius: 11px;
+      padding: .36rem .52rem;
+      font-size: .82rem;
+    }
+
+    .local-block {
+      border: 1px dashed #dcc6b5;
+      border-radius: 12px;
+      padding: .7rem;
+      background: #fffdfb;
+      margin-bottom: .8rem;
+      font-size: .87rem;
+      color: #5f5249;
+    }
+
+    .faq {
+      display: grid;
+      gap: .5rem;
+    }
+    details {
+      border: 1px solid #e8d8ca;
+      border-radius: 10px;
+      padding: .52rem .62rem;
+      background: #fff;
+      font-size: .86rem;
+    }
+    summary { cursor: pointer; font-weight: 600; color: #5a473c; }
+
+    .capture {
+      background: var(--latte);
+    }
+    form {
+      display: grid;
+      gap: .55rem;
+      margin-top: .2rem;
+    }
+    input, select {
+      width: 100%;
+      border: 1px solid #dcc8b8;
+      border-radius: 10px;
+      padding: .58rem;
+      background: #fff;
+      font-size: .88rem;
+    }
+    .offer {
+      border: 1px solid #e6d6c7;
+      border-radius: 12px;
+      background: #fff;
+      padding: .68rem;
+      font-size: .86rem;
+      color: #5a4b41;
+      margin-bottom: .75rem;
+    }
+    .trust {
+      margin-top: .8rem;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: .45rem;
+      text-align: center;
+      font-size: .74rem;
+    }
+    .trust span {
+      border: 1px solid #e6d5c6;
+      border-radius: 9px;
+      padding: .33rem .2rem;
+      background: #fff;
+    }
+    .hours {
+      margin-top: .7rem;
+      font-size: .84rem;
+      color: #5f5148;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .trust { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- Local SEO Schema Placeholder -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Panda's Coffee House",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Balham High Road",
+      "addressLocality": "Balham",
+      "addressRegion": "London",
+      "postalCode": "SW12"
+    },
+    "servesCuisine": ["Coffee", "Brunch", "Pastries"],
+    "areaServed": "Balham",
+    "url": "https://example.com"
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <span class="eyebrow">Balham Landing Mockup • Task 2</span>
+    <h1>Panda's Coffee House</h1>
+    <p class="sub">Friendly neighbourhood coffee in Balham — ideal for your morning flat white, brunch catchups, and weekday laptop sessions.</p>
+    <div class="cta-row">
+      <button class="btn primary">Get Directions</button>
+      <button class="btn soft">Join Coffee Club</button>
+      <button class="btn soft">View Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="card">
+        <h2>Local SEO Structure</h2>
+        <p class="muted">Optimised for discovery across "coffee shop in Balham" intent and nearby location searches.</p>
+
+        <div class="keywords">
+          <span class="kw">Best coffee in Balham</span>
+          <span class="kw">Brunch near Balham Station</span>
+          <span class="kw">Dog-friendly café Balham</span>
+          <span class="kw">Work-friendly coffee shop SW12</span>
+        </div>
+
+        <div class="local-block">
+          <strong>Location-first copy block:</strong> "Just 3 minutes from Balham Station on Balham High Road, Panda's Coffee House serves specialty coffee, fresh pastries, and all-day brunch for locals and commuters."
+        </div>
+
+        <div class="faq">
+          <details open>
+            <summary>Do you have Wi-Fi and plug sockets?</summary>
+            <p>Yes — free Wi-Fi and charging spots available during off-peak hours.</p>
+          </details>
+          <details>
+            <summary>Are you open early for commuters?</summary>
+            <p>We're open from 7:00 AM on weekdays for takeaway and sit-in.</p>
+          </details>
+          <details>
+            <summary>Do you offer dairy-free options?</summary>
+            <p>Absolutely — oat, almond, and soy milk options are available for all drinks.</p>
+          </details>
+        </div>
+
+        <p class="hours"><strong>SEO support blocks:</strong> reviews preview, map embed, consistent NAP, and FAQ/schema-ready markup.</p>
+      </section>
+
+      <aside class="card capture">
+        <h2>Customer Capture Offer</h2>
+        <p class="muted">Offer-led signup designed for quick conversion from local visitors.</p>
+
+        <div class="offer">
+          🎁 <strong>Welcome Perk:</strong> Get <strong>20% off your first pastry + coffee combo</strong> when you join the Panda Coffee Club.
+        </div>
+
+        <form>
+          <input type="text" placeholder="First name" aria-label="First name" />
+          <input type="email" placeholder="Email address" aria-label="Email" />
+          <input type="tel" placeholder="Mobile number (optional)" aria-label="SMS number" />
+          <select aria-label="Visit preference">
+            <option>I'm usually here for takeaway</option>
+            <option>I sit in to work/study</option>
+            <option>I visit on weekends</option>
+          </select>
+          <button class="btn primary" type="button" style="width:100%;">Claim Offer</button>
+        </form>
+
+        <div class="trust">
+          <span>⭐ 4.8 Google</span>
+          <span>Free Wi-Fi</span>
+          <span>Open from 7am</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Apple Blue • Balham Venue</title>
+  <style>
+    :root{--copper:#b05f3c;--hazel:#6f4739;--cream:#f6efe7;--milk:#fffaf4;--ink:#1f1a17}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}
+    header{padding:3rem 1rem 2.5rem;text-align:center;background:linear-gradient(165deg,#efddcf,#f8eee3 45%,#fff)}
+    .tag{display:inline-block;border:1px solid #e3cdb9;border-radius:999px;padding:.3rem .65rem;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:#7a6455;background:#ffffffb5}
+    h1{margin:.7rem 0 .5rem;font-size:clamp(1.8rem,6vw,2.8rem);color:var(--hazel)} .sub{max-width:700px;margin:0 auto 1rem;color:#605249}
+    .cta{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:.72rem 1.15rem;font-size:.9rem;cursor:pointer}
+    .btn.p{background:var(--copper);color:#fff}.btn.s{background:#f3e5d8;color:#5e4b3f}
+    main{max-width:1060px;margin:-1rem auto 2rem;padding:0 1rem}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem}
+    .card{background:#fff;border:1px solid #eadccf;border-radius:18px;padding:1rem;box-shadow:0 14px 34px rgba(40,25,15,.08)}
+    h2{margin:0 0 .55rem;font-size:1.05rem;color:var(--hazel)} .muted{margin:0 0 .75rem;color:#67584f;font-size:.92rem}
+    .events{display:grid;gap:.5rem}.event{display:flex;justify-content:space-between;gap:.5rem;border:1px solid #e7d7c8;border-radius:10px;background:var(--milk);padding:.55rem .6rem;font-size:.87rem}
+    .promo{border:1px dashed #dbc6b4;border-radius:12px;padding:.65rem;background:#fffdfb;color:#5f5249;font-size:.87rem;margin-top:.6rem}
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin-top:.75rem;text-align:center;font-size:.74rem}
+    .trust span{border:1px solid #e7d6c7;border-radius:9px;padding:.34rem .2rem;background:#fff}
+    .testi{display:grid;gap:.5rem}.quote{border:1px solid #e7d7c8;border-radius:10px;padding:.55rem .6rem;background:#fff;font-size:.86rem;color:#5f5249}
+    form{display:grid;gap:.55rem;margin-top:.65rem} input,select,textarea{width:100%;border:1px solid #dcc8b8;border-radius:10px;padding:.58rem;background:#fff;font-size:.88rem}
+    textarea{min-height:90px;resize:vertical}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}} @media (max-width:540px){.trust{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="tag">Task 4 • Events + Promos + Trust</span>
+    <h1>The Apple Blue</h1>
+    <p class="sub">A conversion-focused venue page highlighting weekly events, promo hooks, and social proof to build confidence quickly.</p>
+    <div class="cta">
+      <button class="btn p">View Events</button>
+      <button class="btn s">Book a Table</button>
+      <button class="btn s">Private Hire</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>What’s On This Week</h2>
+        <p class="muted">Event-first layout with clear booking paths for groups and regulars.</p>
+        <div class="events">
+          <div class="event"><span>Tue • Quiz Night</span><strong>7:30 PM</strong></div>
+          <div class="event"><span>Thu • Live Acoustic Set</span><strong>8:00 PM</strong></div>
+          <div class="event"><span>Sat • DJ + Late Kitchen</span><strong>9:00 PM</strong></div>
+        </div>
+        <div class="promo"><strong>Promo banner:</strong> 2-for-1 cocktails (Thu 6–8 PM) • Sunday roast + drink bundle.</div>
+        <div class="trust">
+          <span>⭐ 4.7 Google</span>
+          <span>Large group friendly</span>
+          <span>Licensed late</span>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Trust & Enquiries</h2>
+        <p class="muted">Blend testimonials with a quick enquiry form for bookings and private events.</p>
+        <div class="testi">
+          <div class="quote">“Great staff and atmosphere — perfect for birthdays.”</div>
+          <div class="quote">“Reliable event nights and excellent cocktails.”</div>
+        </div>
+        <form>
+          <input type="text" placeholder="Your name" />
+          <input type="email" placeholder="Email" />
+          <select><option>General table booking</option><option>Private hire enquiry</option><option>Birthday / celebration</option></select>
+          <textarea placeholder="Tell us date, group size, and any requests"></textarea>
+          <button type="button" class="btn p" style="width:100%">Send Enquiry</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

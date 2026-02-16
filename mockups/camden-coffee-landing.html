@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camden Coffee House • Balham</title>
+  <style>
+    :root {
+      --copper: #b05f3c;
+      --hazel: #734939;
+      --cream: #f4ede4;
+      --sage: #6b8b67;
+      --charcoal: #1f1a17;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80') center/cover;
+      color: #fff;
+      padding: 4rem 1.5rem;
+      position: relative;
+      text-align: center;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(27, 20, 17, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1rem;
+      letter-spacing: 0.5rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin: 0 0 1rem;
+    }
+    .value-prop {
+      font-size: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+    .cta {
+      background: var(--copper);
+      color: #fff;
+      border: none;
+      padding: 0.95rem 2.5rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    main {
+      max-width: 1100px;
+      margin: -3rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+    section {
+      background: white;
+      border-radius: 22px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 25px 60px rgba(31,26,23,0.08);
+    }
+    section h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: var(--hazel);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .menu-card {
+      padding: 1rem;
+      border: 1px solid #f1ded0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff, #fff8f1);
+    }
+    .menu-card h3 {
+      margin-top: 0;
+      color: var(--copper);
+    }
+    .hours-location {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .hours-table {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+    .hours-table li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed #e1d3c7;
+      font-size: 0.95rem;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      border-radius: 18px;
+      min-height: 280px;
+    }
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 12px;
+      border: 1px solid #dac8b9;
+      font-size: 1rem;
+      background: #fff9f3;
+    }
+    .contact-form textarea {
+      min-height: 140px;
+      grid-column: 1/-1;
+      resize: vertical;
+    }
+    .form-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      grid-column: 1/-1;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      color: #6b5f56;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 640px) {
+      header {
+        padding: 3rem 1rem;
+      }
+      section {
+        padding: 1.5rem;
+      }
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+      .cta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-content">
+      <div class="logo">Camden Coffee House • Balham</div>
+      <h1>Neighbourhood coffee, roasted with heart.</h1>
+      <p class="value-prop">Small-batch espresso, handcrafted bakes, and a space that feels like home — right off Balham High Road. Let’s plan the perfect coffee moment for your team or guests.</p>
+      <button class="cta">Book a tasting call</button>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="menu-heading">
+      <h2 id="menu-heading">Menu Highlights</h2>
+      <p>Seasonal beans from UK roasters, pastries from local bakers, and plant-based options across the board.</p>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <h3>Signature Espresso</h3>
+          <p>Balanced caramel + cocoa profile, available as flat white, cortado, or iced shaken.</p>
+        </article>
+        <article class="menu-card">
+          <h3>Brew Bar</h3>
+          <p>Single-origin pour overs, slow-drip cold brew, and nitro taps for events.</p>
+        </article>
+        <article class="menu-card">
+          <h3>Fresh Bites</h3>
+          <p>Morning buns, focaccia toasties, and vegan banana loaf made daily.</p>
+        </article>
+        <article class="menu-card">
+          <h3>Community Add-ons</h3>
+          <p>Latte art mini-workshops, coffee subscriptions, custom gift bags.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="hours-heading">
+      <div class="hours-location">
+        <div>
+          <h2 id="hours-heading">Opening Hours</h2>
+          <p>Pop in for your daily ritual or reserve the space for a private tasting.</p>
+          <ul class="hours-table">
+            <li><span>Monday – Friday</span><span>07:00 – 18:00</span></li>
+            <li><span>Saturday</span><span>08:00 – 19:00</span></li>
+            <li><span>Sunday</span><span>08:30 – 17:00</span></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Find Us</h2>
+          <p>34 Balham High Road, SW12 9AA • Opposite Balham Station</p>
+          <iframe title="Camden Coffee House Balham map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19854.23726670417!2d-0.158412348601902!3d51.44375426370433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760552bd4f9ed5%3A0x6447d4af0d6c23!2sBalham%2C%20London!5e0!3m2!1sen!2suk!4v1700000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Book a Call or Send an Enquiry</h2>
+      <p>Looking to bring speciality coffee to your office, event, or local collab? Tell us the basics and we’ll respond within one business day.</p>
+      <form class="contact-form">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Occasion / Company
+          <input type="text" name="company" placeholder="Company or event name">
+        </label>
+        <label>
+          Preferred Date
+          <input type="date" name="date">
+        </label>
+        <label style="grid-column: 1 / -1;">
+          Message
+          <textarea name="message" placeholder="Tell us about your idea, headcount, or budget…"></textarea>
+        </label>
+        <div class="form-footer">
+          <button class="cta" type="submit">Send enquiry</button>
+          <small>Prefer a quick chat? Call 020 1234 5678 · hello@camdencoffee.co.uk</small>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Camden Coffee House Balham · Follow us @camdencoffeehouse
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parish Coffee • Balham</title>
+  <style>
+    :root{--copper:#b05f3c;--hazel:#6f4739;--cream:#f6efe7;--milk:#fffaf4;--ink:#1f1a17}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55}
+    header{padding:3rem 1rem 2.5rem;text-align:center;background:linear-gradient(165deg,#efddcf,#f8eee3 45%,#fff)}
+    .tag{display:inline-block;border:1px solid #e3cdb9;border-radius:999px;padding:.3rem .65rem;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:#7a6455;background:#ffffffb5}
+    h1{margin:.7rem 0 .5rem;font-size:clamp(1.8rem,6vw,2.8rem);color:var(--hazel)} .sub{max-width:680px;margin:0 auto 1rem;color:#605249}
+    .cta{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:.72rem 1.15rem;font-size:.9rem;cursor:pointer}
+    .btn.p{background:var(--copper);color:#fff}.btn.s{background:#f3e5d8;color:#5e4b3f}
+    main{max-width:1060px;margin:-1rem auto 2rem;padding:0 1rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .card{background:#fff;border:1px solid #eadccf;border-radius:18px;padding:1rem;box-shadow:0 14px 34px rgba(40,25,15,.08)}
+    h2{margin:0 0 .55rem;font-size:1.05rem;color:var(--hazel)} .muted{margin:0 0 .75rem;color:#67584f;font-size:.92rem}
+    .menu{display:grid;gap:.5rem}.item{display:flex;justify-content:space-between;gap:.5rem;border:1px solid #e7d7c8;border-radius:10px;background:var(--milk);padding:.5rem .6rem;font-size:.88rem}
+    .contact{display:grid;gap:.55rem} input,textarea{width:100%;border:1px solid #dcc8b8;border-radius:10px;padding:.58rem;background:#fff;font-size:.88rem}
+    textarea{min-height:110px;resize:vertical}
+    .meta{display:grid;gap:.45rem;font-size:.86rem;color:#5f5249}.pill{border:1px dashed #dbc6b4;border-radius:10px;padding:.45rem .55rem;background:#fffdfb}
+    .map{margin-top:.6rem;border:1px solid #e7d7c8;border-radius:12px;background:#fff;padding:.6rem;font-size:.85rem;color:#5f5148}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="tag">Task 3 • Brochure + Contact + Menu</span>
+    <h1>Parish Coffee</h1>
+    <p class="sub">A clean one-page brochure site for locals: who we are, what’s on the menu, and how to find or contact us.</p>
+    <div class="cta">
+      <button class="btn p">View Menu</button>
+      <button class="btn s">Find Us</button>
+      <button class="btn s">Contact</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="card">
+        <h2>Menu Highlights</h2>
+        <p class="muted">Concise brochure-style menu snapshot with room for a full menu PDF link.</p>
+        <div class="menu">
+          <div class="item"><span>House Flat White</span><strong>£3.70</strong></div>
+          <div class="item"><span>Single-Origin Pour Over</span><strong>£4.40</strong></div>
+          <div class="item"><span>Smoked Salmon Bagel</span><strong>£7.90</strong></div>
+          <div class="item"><span>Vegan Banana Loaf</span><strong>£3.40</strong></div>
+        </div>
+        <div class="map"><strong>Map/Location block:</strong> 34 Balham High Road, SW12 • 3-min walk from Balham Station (embed map here).</div>
+      </section>
+
+      <aside class="card">
+        <h2>Contact & Visit</h2>
+        <p class="muted">Simple brochure contact panel for bookings, catering, and general enquiries.</p>
+        <div class="meta">
+          <div class="pill"><strong>Phone:</strong> 020 1234 5678</div>
+          <div class="pill"><strong>Email:</strong> hello@parishcoffee.co.uk</div>
+          <div class="pill"><strong>Hours:</strong> Mon–Fri 07:00–18:00 • Sat–Sun 08:00–17:00</div>
+        </div>
+        <form class="contact" style="margin-top:.7rem">
+          <input type="text" placeholder="Your name" />
+          <input type="email" placeholder="Email" />
+          <textarea placeholder="Message"></textarea>
+          <button type="button" class="btn p" style="width:100%">Send Enquiry</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

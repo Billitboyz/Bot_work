@@ -11,6 +11,7 @@
     <aside class="sidebar card">
       <div class="side-title">Mission Control</div>
       <nav class="side-nav" id="sideNav">
+        <button class="side-tab" data-side-tab="office">Office</button>
         <button class="side-tab active" data-side-tab="tasks">Tasks</button>
         <button class="side-tab" data-side-tab="content">Content</button>
         <button class="side-tab" data-side-tab="approvals">Approvals</button>
@@ -18,7 +19,6 @@
         <button class="side-tab" data-side-tab="projects">Projects</button>
         <button class="side-tab" data-side-tab="memory">Memory</button>
         <button class="side-tab" data-side-tab="docs">Docs</button>
-        <button class="side-tab" data-side-tab="office">Office</button>
       </nav>
 
       <div class="side-section">
@@ -41,21 +41,21 @@
 
       <section class="grid">
         <article class="card">
-          <h2>Agent List</h2>
+          <h2 id="leftSectionTitle">Agent List</h2>
           <div class="agents" id="agentList"></div>
         </article>
 
         <article class="card">
-          <h2>Current Task + Queue Summary</h2>
+          <h2 id="rightSectionTitle">Current Task + Queue Summary</h2>
 
           <div class="queue-summary" id="queueSummary"></div>
 
           <div class="current-task" id="currentTask"></div>
 
-          <h2 style="margin-top: 12px;">Task Queue (clickable)</h2>
+          <h2 id="mainSectionTitle" style="margin-top: 12px;">Task Queue (clickable)</h2>
           <div class="task-queue" id="taskQueue"></div>
 
-          <h2 style="margin-top: 12px;">Status Feed</h2>
+          <h2 id="bottomSectionTitle" style="margin-top: 12px;">Status Feed</h2>
           <div class="feed" id="statusFeed"></div>
         </article>
       </section>

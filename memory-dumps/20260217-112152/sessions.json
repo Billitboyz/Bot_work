@@ -1,0 +1,90 @@
+{
+  "path": "/home/deploy/.openclaw/agents/main/sessions/sessions.json",
+  "count": 6,
+  "activeMinutes": null,
+  "sessions": [
+    {
+      "key": "agent:main:main",
+      "kind": "direct",
+      "updatedAt": 1771327246292,
+      "ageMs": 70062,
+      "sessionId": "158dd79f-2742-412f-9f28-80a78a15083b",
+      "systemSent": true,
+      "abortedLastRun": false,
+      "inputTokens": 111906,
+      "outputTokens": 299,
+      "totalTokens": 118138,
+      "totalTokensFresh": true,
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    {
+      "key": "agent:main:subagent:a236b33e-9b7b-462c-a895-450e02f2c471",
+      "kind": "direct",
+      "updatedAt": 1771277314668,
+      "ageMs": 50001686,
+      "sessionId": "36392a7e-0cf7-47eb-923c-b3a5580fe667",
+      "abortedLastRun": false,
+      "inputTokens": 3473,
+      "outputTokens": 133,
+      "totalTokens": 6161,
+      "totalTokensFresh": true,
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    {
+      "key": "agent:main:subagent:457fa56d-60a6-4dad-9307-6fcbcba0613a",
+      "kind": "direct",
+      "updatedAt": 1771277308404,
+      "ageMs": 50007950,
+      "sessionId": "810b7a3c-40de-4965-bd96-01d7c82012be",
+      "abortedLastRun": false,
+      "inputTokens": 29342,
+      "outputTokens": 53,
+      "totalTokens": 29342,
+      "totalTokensFresh": true,
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    {
+      "key": "agent:main:subagent:e91c6fc1-a90e-41f4-ba05-4d9d1faecb31",
+      "kind": "direct",
+      "updatedAt": 1771274290961,
+      "ageMs": 53025393,
+      "sessionId": "3232c086-ed99-4641-8305-57ffeaa560ff",
+      "abortedLastRun": false,
+      "inputTokens": 10302,
+      "outputTokens": 147,
+      "totalTokens": 39486,
+      "totalTokensFresh": true,
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    {
+      "key": "agent:main",
+      "kind": "direct",
+      "updatedAt": 1771227162443,
+      "ageMs": 100153911,
+      "sessionId": "ff44a2b9-c1e3-4e7c-b459-0471f3f8259e",
+      "totalTokens": null,
+      "totalTokensFresh": false,
+      "model": "gpt-5.3-codex",
+      "contextTokens": 272000
+    },
+    {
+      "key": "agent:main:telegram:group:-5050826375",
+      "kind": "group",
+      "updatedAt": 1771219042699,
+      "ageMs": 108273655,
+      "sessionId": "c8787ca3-bc02-4c47-a2cb-c73e337647cb",
+      "systemSent": true,
+      "abortedLastRun": false,
+      "inputTokens": 93,
+      "outputTokens": 43,
+      "totalTokens": 13661,
+      "totalTokensFresh": true,
+      "model": "gpt-4.1-mini",
+      "contextTokens": 1047576
+    }
+  ]
+}

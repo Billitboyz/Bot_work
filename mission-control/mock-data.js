@@ -1,9 +1,10 @@
 export const mockData = {
   agents: [
     { id: 'agent-main', name: 'Main Agent', status: 'working', task: 'Mission Control dashboard (frontend)' },
-    { id: 'agent-coder-1', name: 'Coder Subagent #1', status: 'working', task: 'Build agent list and task panels' },
-    { id: 'agent-coder-2', name: 'Coder Subagent #2', status: 'idle', task: 'Awaiting assignment' },
-    { id: 'agent-ops', name: 'Ops Watcher', status: 'blocked', task: 'Waiting for data source token' }
+    { id: 'agent-coder', name: 'Coder Subagent', status: 'working', task: 'Backend/API integration and tests' },
+    { id: 'agent-caretaker', name: 'Caretaker Subagent', status: 'working', task: 'Optimization and housekeeping checks' },
+    { id: 'agent-leads', name: 'Leads Subagent', status: 'idle', task: 'Ready for /sales lead and outreach workflows' },
+    { id: 'agent-bb', name: 'BB Subagent', status: 'idle', task: 'Ready for /bb command replies' }
   ],
   queue: { total: 12, inProgress: 5, queued: 6, blocked: 1 },
   currentTask: {

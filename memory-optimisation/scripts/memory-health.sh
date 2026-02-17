@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="/home/deploy/.openclaw/workspace"
+ROOT="${ROOT:-/home/deploy/.openclaw/workspace}"
 OUT_DIR="${1:-$ROOT/memory-dumps/$(date -u +%Y%m%d-%H%M%S)}"
 mkdir -p "$OUT_DIR"
 
 MEMORY_FILE="$ROOT/MEMORY.md"
 MEMORY_DIR="$ROOT/memory"
+DUMPS_DIR="$ROOT/memory-dumps"
 
 {
   echo "timestamp_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -29,12 +30,20 @@ MEMORY_DIR="$ROOT/memory"
     echo "memory/ missing"
   fi
   echo
+  echo "## dumps stats"
+  if [ -d "$DUMPS_DIR" ]; then
+    echo "dump_count=$(find "$DUMPS_DIR" -mindepth 1 -maxdepth 1 -type d | wc -l)"
+    du -sh "$DUMPS_DIR" 2>/dev/null || true
+  else
+    echo "memory-dumps/ missing"
+  fi
+  echo
   echo "## disk/mem"
   free -h || true
   df -h || true
   echo
   echo "## openclaw status"
-  openclaw status || true
+  timeout -k 5 20 openclaw status || echo "openclaw status unavailable/timed out"
 } > "$OUT_DIR/memory-health.txt"
 
 echo "$OUT_DIR"

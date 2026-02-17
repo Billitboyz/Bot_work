@@ -7,37 +7,58 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="container">
-    <header class="topbar">
-      <div>
-        <div class="title">Mission Control</div>
-        <div class="subtitle">Agent orchestration • task queue • realtime status feed</div>
+  <main class="app-shell">
+    <aside class="sidebar card">
+      <div class="side-title">Mission Control</div>
+      <nav class="side-nav" id="sideNav">
+        <button class="side-tab active" data-side-tab="tasks">Tasks</button>
+        <button class="side-tab" data-side-tab="content">Content</button>
+        <button class="side-tab" data-side-tab="approvals">Approvals</button>
+        <button class="side-tab" data-side-tab="calendar">Calendar</button>
+        <button class="side-tab" data-side-tab="projects">Projects</button>
+        <button class="side-tab" data-side-tab="memory">Memory</button>
+        <button class="side-tab" data-side-tab="docs">Docs</button>
+        <button class="side-tab" data-side-tab="office">Office</button>
+      </nav>
+
+      <div class="side-section">
+        <div class="side-section-title">Task Sidebar</div>
+        <div class="side-task-list" id="sideTaskList"></div>
       </div>
-      <div>
-        <div class="status-pill" id="lastUpdated">Last update: --</div>
-        <div id="dataSource" class="subtitle" style="margin-top: 6px; text-align: right;">Source: --</div>
-      </div>
-    </header>
+    </aside>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Agent List</h2>
-        <div class="agents" id="agentList"></div>
-      </article>
+    <section class="container content-pane">
+      <header class="topbar">
+        <div>
+          <div class="title" id="workspaceTitle">Mission Control</div>
+          <div class="subtitle" id="workspaceSubtitle">Agent orchestration • task queue • realtime status feed</div>
+        </div>
+        <div>
+          <div class="status-pill" id="lastUpdated">Last update: --</div>
+          <div id="dataSource" class="subtitle" style="margin-top: 6px; text-align: right;">Source: --</div>
+        </div>
+      </header>
 
-      <article class="card">
-        <h2>Current Task + Queue Summary</h2>
+      <section class="grid">
+        <article class="card">
+          <h2>Agent List</h2>
+          <div class="agents" id="agentList"></div>
+        </article>
 
-        <div class="queue-summary" id="queueSummary"></div>
+        <article class="card">
+          <h2>Current Task + Queue Summary</h2>
 
-        <div class="current-task" id="currentTask"></div>
+          <div class="queue-summary" id="queueSummary"></div>
 
-        <h2 style="margin-top: 12px;">Task Queue (clickable)</h2>
-        <div class="task-queue" id="taskQueue"></div>
+          <div class="current-task" id="currentTask"></div>
 
-        <h2 style="margin-top: 12px;">Status Feed</h2>
-        <div class="feed" id="statusFeed"></div>
-      </article>
+          <h2 style="margin-top: 12px;">Task Queue (clickable)</h2>
+          <div class="task-queue" id="taskQueue"></div>
+
+          <h2 style="margin-top: 12px;">Status Feed</h2>
+          <div class="feed" id="statusFeed"></div>
+        </article>
+      </section>
     </section>
   </main>
 

@@ -14,10 +14,22 @@ const state = {
   error: null,
   source: null,
   refreshInFlight: false,
-  queueFilter: 'all'
+  queueFilter: 'all',
+  sideTab: 'tasks'
 };
 
 const nowUtc = () => new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
+const tabMeta = {
+  tasks: { title: 'Mission Control', subtitle: 'Task operations and live execution queue' },
+  content: { title: 'Content', subtitle: 'Content-oriented task lane (wire actions next)' },
+  approvals: { title: 'Approvals', subtitle: 'Approval queue and pending confirmations' },
+  calendar: { title: 'Calendar', subtitle: 'Scheduled work and timeline view' },
+  projects: { title: 'Projects', subtitle: 'Project-level grouping and ownership' },
+  memory: { title: 'Memory', subtitle: 'Memory health and optimisation lane' },
+  docs: { title: 'Docs', subtitle: 'Documentation and runbook tasks' },
+  office: { title: 'Office', subtitle: 'AI operations office • live view' }
+};
 
 function alertAndLogImpossible(task) {
   const entry = {
@@ -143,8 +155,11 @@ function render() {
   const taskQueue = document.getElementById('taskQueue');
   const statusFeed = document.getElementById('statusFeed');
   const sourceIndicator = document.getElementById('dataSource');
+  const sideTaskList = document.getElementById('sideTaskList');
+  const workspaceTitle = document.getElementById('workspaceTitle');
+  const workspaceSubtitle = document.getElementById('workspaceSubtitle');
 
-  if (!agentList || !queueSummary || !currentTask || !taskQueue || !statusFeed || !sourceIndicator) {
+  if (!agentList || !queueSummary || !currentTask || !taskQueue || !statusFeed || !sourceIndicator || !sideTaskList || !workspaceTitle || !workspaceSubtitle) {
     throw new Error('Mission Control mount points are missing in DOM');
   }
 
@@ -155,7 +170,11 @@ function render() {
     currentTask.innerHTML = loadingHtml;
     taskQueue.innerHTML = loadingHtml;
     statusFeed.innerHTML = loadingHtml;
+    sideTaskList.innerHTML = loadingHtml;
     sourceIndicator.textContent = 'Source: loading';
+    const meta = tabMeta[state.sideTab] || tabMeta.tasks;
+    workspaceTitle.textContent = meta.title;
+    workspaceSubtitle.textContent = meta.subtitle;
     return;
   }
 
@@ -167,7 +186,11 @@ function render() {
     currentTask.innerHTML = errHtml;
     taskQueue.innerHTML = errHtml;
     statusFeed.innerHTML = errHtml;
+    sideTaskList.innerHTML = errHtml;
     sourceIndicator.textContent = 'Source: unavailable';
+    const meta = tabMeta[state.sideTab] || tabMeta.tasks;
+    workspaceTitle.textContent = meta.title;
+    workspaceSubtitle.textContent = meta.subtitle;
     return;
   }
 
@@ -177,6 +200,19 @@ function render() {
   taskQueue.innerHTML = renderTaskQueue(state.data.tasks, state.queueFilter);
   statusFeed.innerHTML = renderStatusFeed(state.data.events);
   sourceIndicator.textContent = `Source: ${state.source}`;
+
+  const activeTasks = (state.data.tasks || []).filter((t) => t.status !== 'completed').slice(0, 8);
+  sideTaskList.innerHTML = activeTasks.length
+    ? activeTasks.map((t) => `<button class="side-task" data-task-action="start" data-task-id="${t.id}">${t.title}</button>`).join('')
+    : renderNotice('No active tasks.');
+
+  const meta = tabMeta[state.sideTab] || tabMeta.tasks;
+  workspaceTitle.textContent = meta.title;
+  workspaceSubtitle.textContent = meta.subtitle;
+  document.querySelectorAll('.side-tab').forEach((btn) => {
+    const on = btn.getAttribute('data-side-tab') === state.sideTab;
+    btn.classList.toggle('active', on);
+  });
 }
 
 async function loadDashboard() {
@@ -223,6 +259,13 @@ function bindUiEvents() {
     const filterBtn = event.target.closest('[data-queue-filter]');
     if (filterBtn) {
       state.queueFilter = filterBtn.getAttribute('data-queue-filter') || 'all';
+      render();
+      return;
+    }
+
+    const sideTabBtn = event.target.closest('[data-side-tab]');
+    if (sideTabBtn) {
+      state.sideTab = sideTabBtn.getAttribute('data-side-tab') || 'tasks';
       render();
     }
   });

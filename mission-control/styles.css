@@ -20,13 +20,23 @@ body {
   color: var(--text);
 }
 
-.container {
-  max-width: 1200px;
+.app-shell {
+  max-width: 1320px;
   margin: 0 auto;
   padding: 20px;
   display: grid;
   gap: 14px;
+  grid-template-columns: 230px 1fr;
 }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.content-pane { width: 100%; }
 
 .topbar {
   background: linear-gradient(180deg, #152241, #121d35);
@@ -37,6 +47,60 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 12px;
+  align-self: start;
+  min-height: 75vh;
+}
+.side-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.side-nav {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.side-tab {
+  border: 1px solid #243a62;
+  background: #0f1930;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+}
+.side-tab.active {
+  border-color: #4f8dff;
+  box-shadow: inset 0 0 0 1px #4f8dff;
+  background: #16294a;
+}
+.side-section {
+  border-top: 1px dashed #2a436f;
+  padding-top: 10px;
+}
+.side-section-title {
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.side-task-list {
+  display: grid;
+  gap: 6px;
+}
+.side-task {
+  border: 1px solid #243a62;
+  background: #0f1930;
+  color: #dbe8ff;
+  border-radius: 8px;
+  padding: 7px 8px;
+  text-align: left;
+  font-size: .76rem;
+  cursor: pointer;
 }
 .title { font-size: 1.1rem; font-weight: 700; }
 .subtitle { color: var(--muted); font-size: .88rem; }
@@ -160,6 +224,8 @@ body {
 }
 
 @media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; min-height: auto; }
   .grid { grid-template-columns: 1fr; }
   .queue-summary { grid-template-columns: repeat(2, 1fr); }
 }

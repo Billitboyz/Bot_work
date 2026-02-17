@@ -1,0 +1,11 @@
+{
+  "name": "mission-control-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "check:syntax": "node --check app.js && node --check api.js && node --check components.js && node --check mock-data.js && node --check smoke.test.mjs",
+    "test:smoke": "node smoke.test.mjs",
+    "test": "npm run check:syntax && npm run test:smoke"
+  }
+}

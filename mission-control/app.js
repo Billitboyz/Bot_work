@@ -262,20 +262,34 @@ function renderByTab() {
     };
   }
 
-  const docs = [
-    { title: 'mission-control/mission-control-dashboard.html', meta: 'Dashboard layout' },
-    { title: 'subagents/sales_agent.md', meta: 'Sales strategy prompts' },
-    { title: 'mockups/*.html', meta: 'UI mockups' },
-    { title: 'memory-optimisation/README.md', meta: 'Memory optimisation runbook' }
+  const area = 'Balham';
+  const leadDocs = [
+    {
+      title: 'Hanoi Eats & Boba',
+      meta: 'mockups/balham/leads/hanoi-eats-boba/hanoi-eats-boba-mockup.html • docs/lead-strategies/hanoi-eats-boba.md'
+    },
+    {
+      title: "Panda's Coffee House",
+      meta: 'mockups/balham/leads/pandas-coffee-house/pandas-coffee-house-mockup.html • docs/lead-strategies/pandas-coffee-house.md'
+    },
+    {
+      title: 'Parish Coffee',
+      meta: 'mockups/balham/leads/parish-coffee/parish-coffee-mockup.html • docs/lead-strategies/parish-coffee.md'
+    },
+    {
+      title: 'The Apple Blue',
+      meta: 'mockups/balham/leads/the-apple-blue/the-apple-blue-mockup.html • docs/lead-strategies/the-apple-blue.md'
+    }
   ];
+
   return {
-    left: renderList(docs, 'No docs yet.'),
-    rightTop: renderNotice('Relevant docs and references.'),
-    rightMid: renderNotice('We can wire direct doc open/actions later.'),
-    rightMain: renderList(docs, 'No docs available.'),
+    left: renderList(leadDocs, `No lead docs found for ${area}.`),
+    rightTop: renderNotice(`Area folder: ${area}`),
+    rightMid: renderNotice('Each lead includes both a mockup and a strategy doc.'),
+    rightMain: renderList(leadDocs, 'No lead docs available.'),
     rightBottom: renderStatusFeed(events),
-    labels: { left: 'Documents', right: 'Docs Summary', main: 'Reference Files', bottom: 'Status Feed' },
-    side: docs
+    labels: { left: `Lead Docs (${area})`, right: 'Docs Summary', main: 'Per-Lead Mockup + Strategy', bottom: 'Status Feed' },
+    side: leadDocs
   };
 }
 

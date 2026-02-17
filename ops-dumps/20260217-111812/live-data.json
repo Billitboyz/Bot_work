@@ -1,0 +1,134 @@
+{
+  "agents": [
+    {
+      "id": "agent-main",
+      "name": "Main Agent",
+      "status": "working",
+      "task": "Main session orchestration",
+      "projects": [
+        "Mission Control",
+        "Daily orchestration"
+      ],
+      "updatedAt": "2026-02-17 11:17 UTC"
+    },
+    {
+      "id": "agent-bb",
+      "name": "BB Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "BB command responses",
+        "Ops responses"
+      ],
+      "updatedAt": "2026-02-17 11:17 UTC"
+    },
+    {
+      "id": "agent-caretaker",
+      "name": "Caretaker Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Optimization",
+        "Housekeeping",
+        "Stability checks"
+      ],
+      "updatedAt": "2026-02-17 11:17 UTC"
+    },
+    {
+      "id": "agent-coder",
+      "name": "Coder Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Mission Control backend",
+        "Integration",
+        "Tests"
+      ],
+      "updatedAt": "2026-02-17 11:17 UTC"
+    },
+    {
+      "id": "agent-leads",
+      "name": "Leads Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Lead tracking",
+        "Outreach pipeline",
+        "Sales workflows"
+      ],
+      "updatedAt": "2026-02-17 11:17 UTC"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task-agent-main",
+      "title": "Main session orchestration",
+      "owner": "Main Agent",
+      "project": "Mission Control",
+      "status": "working",
+      "progress": 55
+    },
+    {
+      "id": "task-agent-bb",
+      "title": "No recent session activity detected",
+      "owner": "BB Subagent",
+      "project": "BB command responses",
+      "status": "paused",
+      "progress": 0
+    },
+    {
+      "id": "task-agent-caretaker",
+      "title": "No recent session activity detected",
+      "owner": "Caretaker Subagent",
+      "project": "Optimization",
+      "status": "paused",
+      "progress": 0
+    },
+    {
+      "id": "task-agent-coder",
+      "title": "No recent session activity detected",
+      "owner": "Coder Subagent",
+      "project": "Mission Control backend",
+      "status": "paused",
+      "progress": 0
+    },
+    {
+      "id": "task-agent-leads",
+      "title": "No recent session activity detected",
+      "owner": "Leads Subagent",
+      "project": "Lead tracking",
+      "status": "paused",
+      "progress": 0
+    }
+  ],
+  "queue": {
+    "total": 5,
+    "inProgress": 1,
+    "queued": 0,
+    "blocked": 4
+  },
+  "currentTask": {
+    "title": "Main session orchestration",
+    "owner": "Main Agent",
+    "eta": "active",
+    "progress": 55,
+    "notes": "Project: Mission Control"
+  },
+  "events": [
+    {
+      "level": "info",
+      "time": "2026-02-17 11:17 UTC",
+      "text": "Live sync complete: 5 agents tracked."
+    },
+    {
+      "level": "ok",
+      "time": "2026-02-17 11:17 UTC",
+      "text": "1 agent(s) currently working."
+    },
+    {
+      "level": "info",
+      "time": "2026-02-17 11:17 UTC",
+      "text": "Idle: 0 • Offline/Blocked: 4"
+    }
+  ]
+}

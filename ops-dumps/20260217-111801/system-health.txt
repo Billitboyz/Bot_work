@@ -1,0 +1,46 @@
+# free -h
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       998Mi       411Mi       3.7Mi       753Mi       969Mi
+Swap:          2.0Gi        43Mi       2.0Gi
+
+# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           197M  1.1M  196M   1% /run
+/dev/vda1        48G  7.1G   41G  15% /
+tmpfs           985M     0  985M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/vda16      881M  114M  705M  14% /boot
+/dev/vda15      105M  6.2M   99M   6% /boot/efi
+tmpfs           197M   24K  197M   1% /run/user/1000
+
+# top snapshot
+top - 11:18:01 up 1 day,  7:05,  1 user,  load average: 0.45, 0.36, 0.18
+Tasks: 117 total,   1 running, 116 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :   1968.1 total,    411.3 free,    998.4 used,    754.4 buff/cache     
+MiB Swap:   2048.0 total,   2004.9 free,     43.1 used.    969.7 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  55059 deploy    20   0   12360   5376   3328 R  10.0   0.3   0:00.01 top
+      1 root      20   0   22680  10112   6912 S   0.0   0.5   0:15.17 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.02 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      9 root       0 -20       0      0      0 I   0.0   0.0   0:03.40 kworker+
+     12 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+     13 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     14 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     15 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tas+
+     16 root      20   0       0      0      0 S   0.0   0.0   0:04.24 ksoftir+
+     17 root      20   0       0      0      0 I   0.0   0.0   0:06.85 rcu_pre+
+     18 root      rt   0       0      0      0 S   0.0   0.0   0:01.05 migrati+
+     19 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_in+
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0
+     21 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kdevtmp+
+     22 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+     24 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kauditd
+     25 root      20   0       0      0      0 S   0.0   0.0   0:00.05 khungta+
+     26 root      20   0       0      0      0 S   0.0   0.0   0:00.00 oom_rea+

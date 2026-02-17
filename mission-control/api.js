@@ -42,6 +42,13 @@ export function validateDashboardPayload(payload) {
     return false;
   }
 
+  if (payload.tasks !== undefined) {
+    if (!Array.isArray(payload.tasks)) return false;
+    if (!payload.tasks.every((t) => hasKeys(t, ['id', 'title', 'status']) && isString(t.id) && isString(t.title) && isString(t.status))) {
+      return false;
+    }
+  }
+
   return true;
 }
 

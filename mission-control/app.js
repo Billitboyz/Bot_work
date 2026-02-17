@@ -3,6 +3,7 @@ import {
   renderAgentList,
   renderQueueSummary,
   renderCurrentTask,
+  renderTaskQueue,
   renderStatusFeed,
   renderNotice
 } from './components.js';
@@ -12,23 +13,94 @@ const state = {
   data: null,
   error: null,
   source: null,
-  refreshInFlight: false
+  refreshInFlight: false,
+  queueFilter: 'all'
 };
 
+const nowUtc = () => new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
 function stampUpdateTime() {
-  const now = new Date();
-  const utc = now.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
-  document.getElementById('lastUpdated').textContent = `Last update: ${utc}`;
+  document.getElementById('lastUpdated').textContent = `Last update: ${nowUtc()}`;
+}
+
+function deriveTasks(data) {
+  if (Array.isArray(data.tasks) && data.tasks.length) return data.tasks;
+  return (data.agents || []).map((a, i) => ({
+    id: `task-${a.id || i}`,
+    title: a.task || 'Untitled task',
+    owner: a.name || 'Unknown',
+    project: Array.isArray(a.projects) && a.projects[0] ? a.projects[0] : 'General',
+    status: a.status === 'working' ? 'working' : 'queued',
+    progress: a.status === 'working' ? 55 : 0
+  }));
+}
+
+function recalcDerivedData(data) {
+  const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+  data.queue = {
+    total: tasks.length,
+    inProgress: tasks.filter((t) => t.status === 'working').length,
+    queued: tasks.filter((t) => t.status === 'queued').length,
+    blocked: tasks.filter((t) => t.status === 'paused' || t.status === 'blocked').length
+  };
+
+  const lead = tasks.find((t) => t.status === 'working') || tasks.find((t) => t.status === 'queued') || null;
+  data.currentTask = lead
+    ? {
+        title: lead.title,
+        owner: lead.owner || 'Unassigned',
+        eta: lead.status === 'working' ? 'active' : 'queued',
+        progress: Number.isFinite(lead.progress) ? lead.progress : (lead.status === 'working' ? 55 : 0),
+        notes: `${lead.project || 'General'} • status: ${lead.status}`
+      }
+    : {
+        title: 'No active tasks',
+        owner: 'System',
+        eta: 'n/a',
+        progress: 0,
+        notes: 'Queue is empty.'
+      };
+}
+
+function pushEvent(level, text) {
+  if (!state.data) return;
+  const events = Array.isArray(state.data.events) ? state.data.events : [];
+  events.unshift({ level, text, time: nowUtc() });
+  state.data.events = events.slice(0, 60);
+}
+
+function applyTaskAction(action, taskId) {
+  if (!state.data?.tasks) return;
+  const tasks = state.data.tasks;
+  const idx = tasks.findIndex((t) => t.id === taskId);
+  if (idx < 0) return;
+
+  const task = tasks[idx];
+  if (action === 'delete') {
+    tasks.splice(idx, 1);
+    pushEvent('warn', `Deleted task: ${task.title}`);
+  } else if (action === 'start') {
+    task.status = 'working';
+    task.progress = Math.min(100, Math.max(5, Number(task.progress || 0) + 10));
+    pushEvent('ok', `Started task: ${task.title}`);
+  } else if (action === 'pause') {
+    task.status = 'paused';
+    pushEvent('info', `Paused task: ${task.title}`);
+  }
+
+  recalcDerivedData(state.data);
+  render();
 }
 
 function render() {
   const agentList = document.getElementById('agentList');
   const queueSummary = document.getElementById('queueSummary');
   const currentTask = document.getElementById('currentTask');
+  const taskQueue = document.getElementById('taskQueue');
   const statusFeed = document.getElementById('statusFeed');
   const sourceIndicator = document.getElementById('dataSource');
 
-  if (!agentList || !queueSummary || !currentTask || !statusFeed || !sourceIndicator) {
+  if (!agentList || !queueSummary || !currentTask || !taskQueue || !statusFeed || !sourceIndicator) {
     throw new Error('Mission Control mount points are missing in DOM');
   }
 
@@ -37,6 +109,7 @@ function render() {
     agentList.innerHTML = loadingHtml;
     queueSummary.innerHTML = loadingHtml;
     currentTask.innerHTML = loadingHtml;
+    taskQueue.innerHTML = loadingHtml;
     statusFeed.innerHTML = loadingHtml;
     sourceIndicator.textContent = 'Source: loading';
     return;
@@ -48,14 +121,16 @@ function render() {
     agentList.innerHTML = errHtml;
     queueSummary.innerHTML = errHtml;
     currentTask.innerHTML = errHtml;
+    taskQueue.innerHTML = errHtml;
     statusFeed.innerHTML = errHtml;
     sourceIndicator.textContent = 'Source: unavailable';
     return;
   }
 
   agentList.innerHTML = renderAgentList(state.data.agents);
-  queueSummary.innerHTML = renderQueueSummary(state.data.queue);
+  queueSummary.innerHTML = renderQueueSummary(state.data.queue, state.queueFilter);
   currentTask.innerHTML = renderCurrentTask(state.data.currentTask);
+  taskQueue.innerHTML = renderTaskQueue(state.data.tasks, state.queueFilter);
   statusFeed.innerHTML = renderStatusFeed(state.data.events);
   sourceIndicator.textContent = `Source: ${state.source}`;
 }
@@ -77,6 +152,9 @@ async function loadDashboard() {
       return;
     }
 
+    result.data.tasks = deriveTasks(result.data);
+    recalcDerivedData(result.data);
+
     state.status = 'ready';
     state.data = result.data;
     state.source = result.source;
@@ -88,7 +166,26 @@ async function loadDashboard() {
   }
 }
 
+function bindUiEvents() {
+  document.addEventListener('click', (event) => {
+    const actionBtn = event.target.closest('[data-task-action]');
+    if (actionBtn) {
+      const action = actionBtn.getAttribute('data-task-action');
+      const taskId = actionBtn.getAttribute('data-task-id');
+      if (action && taskId) applyTaskAction(action, taskId);
+      return;
+    }
+
+    const filterBtn = event.target.closest('[data-queue-filter]');
+    if (filterBtn) {
+      state.queueFilter = filterBtn.getAttribute('data-queue-filter') || 'all';
+      render();
+    }
+  });
+}
+
 async function init() {
+  bindUiEvents();
   await loadDashboard();
   setInterval(stampUpdateTime, 30000);
   setInterval(loadDashboard, 60000);

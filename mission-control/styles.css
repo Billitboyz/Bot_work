@@ -110,12 +110,30 @@ body {
 .metric { background: #0e1830; border: 1px solid #243a62; border-radius: 10px; padding: 10px; }
 .metric .label { font-size: .75rem; color: var(--muted); }
 .metric .value { font-size: 1.25rem; font-weight: 700; margin-top: 2px; }
+.metric-btn { cursor: pointer; text-align: left; color: inherit; }
+.metric-btn.active { border-color: #4f8dff; box-shadow: inset 0 0 0 1px #4f8dff; }
 
 .current-task { border: 1px solid #243a62; border-radius: 10px; background: #0f1930; padding: 12px; margin-bottom: 12px; }
 .current-task .task-title { font-weight: 700; margin-bottom: 5px; }
 .current-task .task-meta { font-size: .82rem; color: var(--muted); }
 .progress { margin-top: 9px; height: 8px; background: #0c1428; border: 1px solid #243a62; border-radius: 999px; overflow: hidden; }
 .progress > div { height: 100%; background: linear-gradient(90deg, #39c4ff, #4f8dff); }
+
+.task-queue { display: grid; gap: 8px; margin-bottom: 12px; }
+.task-row { border: 1px solid #243a62; border-radius: 10px; padding: 10px; background: #0f1930; display: grid; gap: 8px; }
+.task-main { display: grid; gap: 3px; }
+.task-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.task-btn {
+  border: 1px solid #335487;
+  background: #142645;
+  color: #d9e8ff;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: .76rem;
+  cursor: pointer;
+}
+.task-btn:hover { filter: brightness(1.08); }
+.task-btn.danger { border-color: #7a3540; background: #3a1e24; color: #ffc3cb; }
 
 .feed { max-height: 380px; overflow: auto; display: grid; gap: 8px; }
 .event { border: 1px solid #243a62; background: #0f1930; border-radius: 10px; padding: 9px 10px; font-size: .84rem; display: grid; gap: 3px; }

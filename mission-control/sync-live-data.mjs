@@ -97,21 +97,30 @@ function buildData() {
     return (rank[a.status] ?? 9) - (rank[b.status] ?? 9) || a.name.localeCompare(b.name);
   });
 
+  const tasks = agents.map((a) => ({
+    id: `task-${a.id}`,
+    title: a.task,
+    owner: a.name,
+    project: Array.isArray(a.projects) && a.projects[0] ? a.projects[0] : 'General',
+    status: a.status === 'working' ? 'working' : (a.status === 'idle' ? 'queued' : 'paused'),
+    progress: a.status === 'working' ? 55 : 0
+  }));
+
   const queue = {
-    total: agents.length,
-    inProgress: agents.filter((a) => a.status === 'working').length,
-    queued: agents.filter((a) => a.status === 'idle').length,
-    blocked: agents.filter((a) => a.status === 'blocked' || a.status === 'offline').length
+    total: tasks.length,
+    inProgress: tasks.filter((a) => a.status === 'working').length,
+    queued: tasks.filter((a) => a.status === 'queued').length,
+    blocked: tasks.filter((a) => a.status === 'paused' || a.status === 'blocked').length
   };
 
-  const lead = agents.find((a) => a.status === 'working') || agents[0] || null;
+  const lead = tasks.find((a) => a.status === 'working') || tasks[0] || null;
   const currentTask = lead
     ? {
-        title: lead.task,
-        owner: lead.name,
+        title: lead.title,
+        owner: lead.owner,
         eta: lead.status === 'working' ? 'active' : 'n/a',
-        progress: lead.status === 'working' ? 55 : 0,
-        notes: lead.projects?.length ? `Projects: ${lead.projects.join(', ')}` : 'No project tags.'
+        progress: Number.isFinite(lead.progress) ? lead.progress : 0,
+        notes: lead.project ? `Project: ${lead.project}` : 'No project tags.'
       }
     : {
         title: 'No active tasks',
@@ -127,7 +136,7 @@ function buildData() {
     { level: 'info', time: utcTime(now), text: `Idle: ${queue.queued} • Offline/Blocked: ${queue.blocked}` }
   ];
 
-  return { agents, queue, currentTask, events };
+  return { agents, tasks, queue, currentTask, events };
 }
 
 const data = buildData();

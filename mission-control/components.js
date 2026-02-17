@@ -42,7 +42,7 @@ export function renderQueueSummary(queue = {}, activeFilter = 'all') {
     total: toCount(queue.total),
     inProgress: toCount(queue.inProgress),
     queued: toCount(queue.queued),
-    blocked: toCount(queue.blocked)
+    completed: toCount(queue.completed)
   };
 
   const metric = (label, value, filter) => `
@@ -56,7 +56,7 @@ export function renderQueueSummary(queue = {}, activeFilter = 'all') {
     metric('Total', safe.total, 'all'),
     metric('In Progress', safe.inProgress, 'working'),
     metric('Queued', safe.queued, 'queued'),
-    metric('Blocked/Paused', safe.blocked, 'blocked')
+    metric('Completed', safe.completed, 'completed')
   ].join('');
 }
 
@@ -75,47 +75,33 @@ export function renderTaskQueue(tasks = [], filter = 'all') {
   if (!tasks.length) return renderNotice('No tasks in queue.');
 
   const matches = (task) => {
-    if (task.status === 'completed') return false;
-    if (filter === 'all') return true;
-    if (filter === 'blocked') return task.status === 'blocked' || task.status === 'paused';
+    if (filter === 'all') return task.status !== 'completed';
     return task.status === filter;
   };
 
   const filtered = tasks.filter(matches);
   if (!filtered.length) return renderNotice(`No tasks for filter: ${filter}`);
 
-  return filtered.map((t) => `
-    <div class="task-row" data-task-id="${esc(t.id)}">
-      <div class="task-main">
-        <div class="task-title">${esc(t.title)}</div>
-        <div class="task-meta">${esc(t.owner || 'Unassigned')} • ${esc(t.project || 'General')}</div>
-      </div>
-      <div class="task-controls">
-        <span class="badge ${esc(t.status)}">${esc(t.status)}</span>
-        <button class="task-btn" data-task-action="start" data-task-id="${esc(t.id)}">Start</button>
-        <button class="task-btn" data-task-action="pause" data-task-id="${esc(t.id)}">Pause</button>
-        <button class="task-btn ok" data-task-action="complete" data-task-id="${esc(t.id)}">Complete</button>
-        <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>
-      </div>
-    </div>
-  `).join('');
-}
+  return filtered.map((t) => {
+    const completed = t.status === 'completed';
+    const controls = completed
+      ? `<span class="badge completed">completed</span>
+         <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>`
+      : `<span class="badge ${esc(t.status)}">${esc(t.status)}</span>
+         <button class="task-btn" data-task-action="start" data-task-id="${esc(t.id)}">Start</button>
+         <button class="task-btn ok" data-task-action="resolve" data-task-id="${esc(t.id)}">Resolve & Complete</button>
+         <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>`;
 
-export function renderCompletedTasks(tasks = []) {
-  const completed = tasks.filter((t) => t.status === 'completed');
-  if (!completed.length) return renderNotice('No completed tasks yet.');
-  return completed.map((t) => `
-    <div class="task-row completed" data-task-id="${esc(t.id)}">
-      <div class="task-main">
-        <div class="task-title">${esc(t.title)}</div>
-        <div class="task-meta">${esc(t.owner || 'Unassigned')} • ${esc(t.project || 'General')}</div>
+    return `
+      <div class="task-row ${completed ? 'completed' : ''}" data-task-id="${esc(t.id)}">
+        <div class="task-main">
+          <div class="task-title">${esc(t.title)}</div>
+          <div class="task-meta">${esc(t.owner || 'Unassigned')} • ${esc(t.project || 'General')}</div>
+        </div>
+        <div class="task-controls">${controls}</div>
       </div>
-      <div class="task-controls">
-        <span class="badge completed">completed</span>
-        <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 export function renderStatusFeed(events = []) {

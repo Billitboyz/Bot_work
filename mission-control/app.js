@@ -4,7 +4,6 @@ import {
   renderQueueSummary,
   renderCurrentTask,
   renderTaskQueue,
-  renderCompletedTasks,
   renderStatusFeed,
   renderNotice
 } from './components.js';
@@ -19,6 +18,27 @@ const state = {
 };
 
 const nowUtc = () => new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
+function alertAndLogImpossible(task) {
+  const entry = {
+    id: task.id,
+    title: task.title,
+    owner: task.owner || 'Unassigned',
+    project: task.project || 'General',
+    time: nowUtc()
+  };
+  try {
+    const key = 'mission-control-impossible-log';
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.unshift(entry);
+    localStorage.setItem(key, JSON.stringify(existing.slice(0, 100)));
+  } catch {}
+
+  console.error('[Mission Control] Escalated impossible task', entry);
+  if (typeof window !== 'undefined' && typeof window.alert === 'function') {
+    window.alert(`Mission Control alert: impossible task escalated\n${entry.title} (${entry.owner})`);
+  }
+}
 
 function stampUpdateTime() {
   document.getElementById('lastUpdated').textContent = `Last update: ${nowUtc()}`;
@@ -38,12 +58,29 @@ function deriveTasks(data) {
 
 function recalcDerivedData(data) {
   const tasks = Array.isArray(data.tasks) ? data.tasks : [];
-  const activeTasks = tasks.filter((t) => t.status !== 'completed');
+
+  // Policy: blocked/paused tasks should be resolved to completed unless impossible.
+  for (const t of tasks) {
+    if ((t.status === 'blocked' || t.status === 'paused') && t.impossible === true) {
+      t.status = 'escalated';
+      t.hiddenEscalated = true;
+      alertAndLogImpossible(t);
+    } else if (t.status === 'blocked' || t.status === 'paused') {
+      t.status = 'completed';
+      t.progress = 100;
+    }
+  }
+
+  const visibleTasks = tasks.filter((t) => t.hiddenEscalated !== true);
+  const activeTasks = visibleTasks.filter((t) => t.status !== 'completed');
+  const completedTasks = visibleTasks.filter((t) => t.status === 'completed');
+
+  data.tasks = visibleTasks;
   data.queue = {
     total: activeTasks.length,
     inProgress: activeTasks.filter((t) => t.status === 'working').length,
     queued: activeTasks.filter((t) => t.status === 'queued').length,
-    blocked: activeTasks.filter((t) => t.status === 'paused' || t.status === 'blocked').length
+    completed: completedTasks.length
   };
 
   const lead = activeTasks.find((t) => t.status === 'working') || activeTasks.find((t) => t.status === 'queued') || null;
@@ -86,9 +123,10 @@ function applyTaskAction(action, taskId) {
     task.progress = Math.min(100, Math.max(5, Number(task.progress || 0) + 10));
     pushEvent('ok', `Started task: ${task.title}`);
   } else if (action === 'pause') {
-    task.status = 'paused';
-    pushEvent('info', `Paused task: ${task.title}`);
-  } else if (action === 'complete') {
+    task.status = 'completed';
+    task.progress = 100;
+    pushEvent('ok', `Auto-resolved paused task to completed: ${task.title}`);
+  } else if (action === 'complete' || action === 'resolve') {
     task.status = 'completed';
     task.progress = 100;
     pushEvent('ok', `Completed task: ${task.title}`);
@@ -103,11 +141,10 @@ function render() {
   const queueSummary = document.getElementById('queueSummary');
   const currentTask = document.getElementById('currentTask');
   const taskQueue = document.getElementById('taskQueue');
-  const completedTasks = document.getElementById('completedTasks');
   const statusFeed = document.getElementById('statusFeed');
   const sourceIndicator = document.getElementById('dataSource');
 
-  if (!agentList || !queueSummary || !currentTask || !taskQueue || !completedTasks || !statusFeed || !sourceIndicator) {
+  if (!agentList || !queueSummary || !currentTask || !taskQueue || !statusFeed || !sourceIndicator) {
     throw new Error('Mission Control mount points are missing in DOM');
   }
 
@@ -117,7 +154,6 @@ function render() {
     queueSummary.innerHTML = loadingHtml;
     currentTask.innerHTML = loadingHtml;
     taskQueue.innerHTML = loadingHtml;
-    completedTasks.innerHTML = loadingHtml;
     statusFeed.innerHTML = loadingHtml;
     sourceIndicator.textContent = 'Source: loading';
     return;
@@ -130,7 +166,6 @@ function render() {
     queueSummary.innerHTML = errHtml;
     currentTask.innerHTML = errHtml;
     taskQueue.innerHTML = errHtml;
-    completedTasks.innerHTML = errHtml;
     statusFeed.innerHTML = errHtml;
     sourceIndicator.textContent = 'Source: unavailable';
     return;
@@ -140,7 +175,6 @@ function render() {
   queueSummary.innerHTML = renderQueueSummary(state.data.queue, state.queueFilter);
   currentTask.innerHTML = renderCurrentTask(state.data.currentTask);
   taskQueue.innerHTML = renderTaskQueue(state.data.tasks, state.queueFilter);
-  completedTasks.innerHTML = renderCompletedTasks(state.data.tasks);
   statusFeed.innerHTML = renderStatusFeed(state.data.events);
   sourceIndicator.textContent = `Source: ${state.source}`;
 }

@@ -6,15 +6,30 @@ export function renderNotice(message, type = 'info') {
 
 export function renderAgentList(agents = []) {
   if (!agents.length) return renderNotice('No active agents yet.');
-  return agents.map((a) => `
-    <div class="agent" data-agent-id="${esc(a.id)}">
-      <div class="meta">
-        <div class="name">${esc(a.name)}</div>
-        <div class="task">${esc(a.task)}</div>
-      </div>
-      <span class="badge ${esc(a.status)}">${esc(a.status)}</span>
-    </div>
-  `).join('');
+  return agents.map((a) => {
+    const projects = Array.isArray(a.projects) ? a.projects : [];
+    const detailsId = `agent-${esc(a.id)}`;
+    const projectsHtml = projects.length
+      ? `<ul class="projects">${projects.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>`
+      : '<div class="task">No project tags yet.</div>';
+
+    return `
+      <details class="agent expandable" data-agent-id="${esc(a.id)}" open>
+        <summary>
+          <div class="meta">
+            <div class="name">${esc(a.name)}</div>
+            <div class="task">${esc(a.task)}</div>
+          </div>
+          <span class="badge ${esc(a.status)}">${esc(a.status)}</span>
+        </summary>
+        <div class="agent-details" id="${detailsId}">
+          <div class="task"><strong>Projects</strong></div>
+          ${projectsHtml}
+          ${a.updatedAt ? `<div class="task">Updated: ${esc(a.updatedAt)}</div>` : ''}
+        </div>
+      </details>
+    `;
+  }).join('');
 }
 
 export function renderQueueSummary(queue = {}) {

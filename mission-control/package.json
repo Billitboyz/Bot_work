@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 4173",
-    "check:syntax": "node --check app.js && node --check api.js && node --check components.js && node --check mock-data.js && node --check smoke.test.mjs",
+    "live:once": "node sync-live-data.mjs",
+    "live:watch": "bash ./live-watch.sh 20",
+    "check:syntax": "node --check app.js && node --check api.js && node --check components.js && node --check mock-data.js && node --check smoke.test.mjs && node --check sync-live-data.mjs",
     "test:smoke": "node smoke.test.mjs",
     "test": "npm run check:syntax && npm run test:smoke"
   }

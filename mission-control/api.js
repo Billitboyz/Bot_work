@@ -16,7 +16,13 @@ export function validateDashboardPayload(payload) {
   if (!payload || typeof payload !== 'object') return false;
 
   if (!Array.isArray(payload.agents)) return false;
-  if (!payload.agents.every((a) => hasKeys(a, ['id', 'name', 'status', 'task']) && [a.id, a.name, a.status, a.task].every(isString))) {
+  if (!payload.agents.every((a) => {
+    if (!hasKeys(a, ['id', 'name', 'status', 'task'])) return false;
+    if (![a.id, a.name, a.status, a.task].every(isString)) return false;
+    if (a.projects !== undefined && (!Array.isArray(a.projects) || !a.projects.every(isString))) return false;
+    if (a.updatedAt !== undefined && !isString(a.updatedAt)) return false;
+    return true;
+  })) {
     return false;
   }
 
@@ -40,7 +46,7 @@ export function validateDashboardPayload(payload) {
 }
 
 export async function fetchDashboardData(options = {}) {
-  const { endpoint = '/api/mission-control/dashboard', useMockOnError = true } = options;
+  const { endpoint = '/live-data.json', useMockOnError = true } = options;
 
   try {
     const res = await fetch(endpoint, { headers: { Accept: 'application/json' } });

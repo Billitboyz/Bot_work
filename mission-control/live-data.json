@@ -1,0 +1,112 @@
+{
+  "agents": [
+    {
+      "id": "agent-main",
+      "name": "Main Agent",
+      "status": "working",
+      "task": "Main session orchestration",
+      "projects": [
+        "Mission Control",
+        "Daily orchestration"
+      ],
+      "updatedAt": "2026-02-17 10:49 UTC"
+    },
+    {
+      "id": "agent-subagent-348c8d",
+      "name": "Subagent subagent-348c8d",
+      "status": "idle",
+      "task": "No recent activity",
+      "projects": [
+        "Unmapped project"
+      ],
+      "updatedAt": "2026-02-17 10:00 UTC"
+    },
+    {
+      "id": "agent-subagent-4d9d97",
+      "name": "Subagent subagent-4d9d97",
+      "status": "idle",
+      "task": "No recent activity",
+      "projects": [
+        "Unmapped project"
+      ],
+      "updatedAt": "2026-02-17 10:00 UTC"
+    },
+    {
+      "id": "agent-bb",
+      "name": "BB Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "BB command responses",
+        "Ops responses"
+      ],
+      "updatedAt": "2026-02-17 10:52 UTC"
+    },
+    {
+      "id": "agent-caretaker",
+      "name": "Caretaker Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Optimization",
+        "Housekeeping",
+        "Stability checks"
+      ],
+      "updatedAt": "2026-02-17 10:52 UTC"
+    },
+    {
+      "id": "agent-coder",
+      "name": "Coder Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Mission Control backend",
+        "Integration",
+        "Tests"
+      ],
+      "updatedAt": "2026-02-17 10:52 UTC"
+    },
+    {
+      "id": "agent-leads",
+      "name": "Leads Subagent",
+      "status": "offline",
+      "task": "No recent session activity detected",
+      "projects": [
+        "Lead tracking",
+        "Outreach pipeline",
+        "Sales workflows"
+      ],
+      "updatedAt": "2026-02-17 10:52 UTC"
+    }
+  ],
+  "queue": {
+    "total": 7,
+    "inProgress": 1,
+    "queued": 2,
+    "blocked": 4
+  },
+  "currentTask": {
+    "title": "Main session orchestration",
+    "owner": "Main Agent",
+    "eta": "active",
+    "progress": 55,
+    "notes": "Projects: Mission Control, Daily orchestration"
+  },
+  "events": [
+    {
+      "level": "info",
+      "time": "2026-02-17 10:52 UTC",
+      "text": "Live sync complete: 7 agents tracked."
+    },
+    {
+      "level": "ok",
+      "time": "2026-02-17 10:52 UTC",
+      "text": "1 agent(s) currently working."
+    },
+    {
+      "level": "info",
+      "time": "2026-02-17 10:52 UTC",
+      "text": "Idle: 2 • Offline/Blocked: 4"
+    }
+  ]
+}

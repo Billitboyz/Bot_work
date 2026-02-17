@@ -9,7 +9,17 @@
         "Mission Control",
         "Daily orchestration"
       ],
-      "updatedAt": "2026-02-17 11:11 UTC"
+      "updatedAt": "2026-02-17 11:24 UTC"
+    },
+    {
+      "id": "agent-subagent-2503de",
+      "name": "Subagent subagent-2503de",
+      "status": "working",
+      "task": "Recently active",
+      "projects": [
+        "Unmapped project"
+      ],
+      "updatedAt": "2026-02-17 11:24 UTC"
     },
     {
       "id": "agent-bb",
@@ -20,7 +30,7 @@
         "BB command responses",
         "Ops responses"
       ],
-      "updatedAt": "2026-02-17 11:14 UTC"
+      "updatedAt": "2026-02-17 11:24 UTC"
     },
     {
       "id": "agent-caretaker",
@@ -32,7 +42,7 @@
         "Housekeeping",
         "Stability checks"
       ],
-      "updatedAt": "2026-02-17 11:14 UTC"
+      "updatedAt": "2026-02-17 11:24 UTC"
     },
     {
       "id": "agent-coder",
@@ -44,7 +54,7 @@
         "Integration",
         "Tests"
       ],
-      "updatedAt": "2026-02-17 11:14 UTC"
+      "updatedAt": "2026-02-17 11:24 UTC"
     },
     {
       "id": "agent-leads",
@@ -56,7 +66,7 @@
         "Outreach pipeline",
         "Sales workflows"
       ],
-      "updatedAt": "2026-02-17 11:14 UTC"
+      "updatedAt": "2026-02-17 11:24 UTC"
     }
   ],
   "tasks": [
@@ -65,6 +75,14 @@
       "title": "Main session orchestration",
       "owner": "Main Agent",
       "project": "Mission Control",
+      "status": "working",
+      "progress": 55
+    },
+    {
+      "id": "task-agent-subagent-2503de",
+      "title": "Recently active",
+      "owner": "Subagent subagent-2503de",
+      "project": "Unmapped project",
       "status": "working",
       "progress": 55
     },
@@ -102,8 +120,8 @@
     }
   ],
   "queue": {
-    "total": 5,
-    "inProgress": 1,
+    "total": 6,
+    "inProgress": 2,
     "queued": 0,
     "blocked": 4
   },
@@ -117,17 +135,17 @@
   "events": [
     {
       "level": "info",
-      "time": "2026-02-17 11:14 UTC",
-      "text": "Live sync complete: 5 agents tracked."
+      "time": "2026-02-17 11:24 UTC",
+      "text": "Live sync complete: 6 agents tracked."
     },
     {
       "level": "ok",
-      "time": "2026-02-17 11:14 UTC",
-      "text": "1 agent(s) currently working."
+      "time": "2026-02-17 11:24 UTC",
+      "text": "2 agent(s) currently working."
     },
     {
       "level": "info",
-      "time": "2026-02-17 11:14 UTC",
+      "time": "2026-02-17 11:24 UTC",
       "text": "Idle: 0 • Offline/Blocked: 4"
     }
   ]

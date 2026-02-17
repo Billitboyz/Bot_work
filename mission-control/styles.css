@@ -133,7 +133,10 @@ body {
   cursor: pointer;
 }
 .task-btn:hover { filter: brightness(1.08); }
+.task-btn.ok { border-color: #2d6b53; background: #17392e; color: #baf5da; }
 .task-btn.danger { border-color: #7a3540; background: #3a1e24; color: #ffc3cb; }
+.task-row.completed { border-color: #2d6b53; background: #0f2020; opacity: 0.95; }
+.completed { background: #17392e; color: #baf5da; border-color: #2d6b53; }
 
 .feed { max-height: 380px; overflow: auto; display: grid; gap: 8px; }
 .event { border: 1px solid #243a62; background: #0f1930; border-radius: 10px; padding: 9px 10px; font-size: .84rem; display: grid; gap: 3px; }

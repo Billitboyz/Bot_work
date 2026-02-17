@@ -75,6 +75,7 @@ export function renderTaskQueue(tasks = [], filter = 'all') {
   if (!tasks.length) return renderNotice('No tasks in queue.');
 
   const matches = (task) => {
+    if (task.status === 'completed') return false;
     if (filter === 'all') return true;
     if (filter === 'blocked') return task.status === 'blocked' || task.status === 'paused';
     return task.status === filter;
@@ -93,6 +94,24 @@ export function renderTaskQueue(tasks = [], filter = 'all') {
         <span class="badge ${esc(t.status)}">${esc(t.status)}</span>
         <button class="task-btn" data-task-action="start" data-task-id="${esc(t.id)}">Start</button>
         <button class="task-btn" data-task-action="pause" data-task-id="${esc(t.id)}">Pause</button>
+        <button class="task-btn ok" data-task-action="complete" data-task-id="${esc(t.id)}">Complete</button>
+        <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+export function renderCompletedTasks(tasks = []) {
+  const completed = tasks.filter((t) => t.status === 'completed');
+  if (!completed.length) return renderNotice('No completed tasks yet.');
+  return completed.map((t) => `
+    <div class="task-row completed" data-task-id="${esc(t.id)}">
+      <div class="task-main">
+        <div class="task-title">${esc(t.title)}</div>
+        <div class="task-meta">${esc(t.owner || 'Unassigned')} • ${esc(t.project || 'General')}</div>
+      </div>
+      <div class="task-controls">
+        <span class="badge completed">completed</span>
         <button class="task-btn danger" data-task-action="delete" data-task-id="${esc(t.id)}">Delete</button>
       </div>
     </div>

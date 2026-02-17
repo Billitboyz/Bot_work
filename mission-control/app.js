@@ -4,6 +4,7 @@ import {
   renderQueueSummary,
   renderCurrentTask,
   renderTaskQueue,
+  renderCompletedTasks,
   renderStatusFeed,
   renderNotice
 } from './components.js';
@@ -37,14 +38,15 @@ function deriveTasks(data) {
 
 function recalcDerivedData(data) {
   const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+  const activeTasks = tasks.filter((t) => t.status !== 'completed');
   data.queue = {
-    total: tasks.length,
-    inProgress: tasks.filter((t) => t.status === 'working').length,
-    queued: tasks.filter((t) => t.status === 'queued').length,
-    blocked: tasks.filter((t) => t.status === 'paused' || t.status === 'blocked').length
+    total: activeTasks.length,
+    inProgress: activeTasks.filter((t) => t.status === 'working').length,
+    queued: activeTasks.filter((t) => t.status === 'queued').length,
+    blocked: activeTasks.filter((t) => t.status === 'paused' || t.status === 'blocked').length
   };
 
-  const lead = tasks.find((t) => t.status === 'working') || tasks.find((t) => t.status === 'queued') || null;
+  const lead = activeTasks.find((t) => t.status === 'working') || activeTasks.find((t) => t.status === 'queued') || null;
   data.currentTask = lead
     ? {
         title: lead.title,
@@ -86,6 +88,10 @@ function applyTaskAction(action, taskId) {
   } else if (action === 'pause') {
     task.status = 'paused';
     pushEvent('info', `Paused task: ${task.title}`);
+  } else if (action === 'complete') {
+    task.status = 'completed';
+    task.progress = 100;
+    pushEvent('ok', `Completed task: ${task.title}`);
   }
 
   recalcDerivedData(state.data);
@@ -97,10 +103,11 @@ function render() {
   const queueSummary = document.getElementById('queueSummary');
   const currentTask = document.getElementById('currentTask');
   const taskQueue = document.getElementById('taskQueue');
+  const completedTasks = document.getElementById('completedTasks');
   const statusFeed = document.getElementById('statusFeed');
   const sourceIndicator = document.getElementById('dataSource');
 
-  if (!agentList || !queueSummary || !currentTask || !taskQueue || !statusFeed || !sourceIndicator) {
+  if (!agentList || !queueSummary || !currentTask || !taskQueue || !completedTasks || !statusFeed || !sourceIndicator) {
     throw new Error('Mission Control mount points are missing in DOM');
   }
 
@@ -110,6 +117,7 @@ function render() {
     queueSummary.innerHTML = loadingHtml;
     currentTask.innerHTML = loadingHtml;
     taskQueue.innerHTML = loadingHtml;
+    completedTasks.innerHTML = loadingHtml;
     statusFeed.innerHTML = loadingHtml;
     sourceIndicator.textContent = 'Source: loading';
     return;
@@ -122,6 +130,7 @@ function render() {
     queueSummary.innerHTML = errHtml;
     currentTask.innerHTML = errHtml;
     taskQueue.innerHTML = errHtml;
+    completedTasks.innerHTML = errHtml;
     statusFeed.innerHTML = errHtml;
     sourceIndicator.textContent = 'Source: unavailable';
     return;
@@ -131,6 +140,7 @@ function render() {
   queueSummary.innerHTML = renderQueueSummary(state.data.queue, state.queueFilter);
   currentTask.innerHTML = renderCurrentTask(state.data.currentTask);
   taskQueue.innerHTML = renderTaskQueue(state.data.tasks, state.queueFilter);
+  completedTasks.innerHTML = renderCompletedTasks(state.data.tasks);
   statusFeed.innerHTML = renderStatusFeed(state.data.events);
   sourceIndicator.textContent = `Source: ${state.source}`;
 }
